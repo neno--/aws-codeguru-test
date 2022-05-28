@@ -1,36 +1,37 @@
 public class Deadlock {
-    private Object process = new Object();
-    private boolean stopped = true;
 
-    public void run() {
-        synchronized (process) {
-            isStopped();
-        }
+  private boolean stopped = true;
+
+  public synchronized void run() {
+    if (isStopped()) {
+      stopped = false;
     }
+  }
 
-    private synchronized boolean isStopped() {
-        return stopped;
+  private boolean isStopped() {
+    return stopped;
+  }
+
+  public synchronized void stopProcess() {
+    if (!isStopped()) {
+      System.out.println("Stopping...");
+      stopped = true;
     }
+  }
 
-    public synchronized void stopProcess() {
-        synchronized (process) {
-            System.out.println("Stopping...");
-        }
-    }
+  public static void main(String args[]) throws InterruptedException {
+    Deadlock deadlock = new Deadlock();
 
-    public static void main(String args[]) throws InterruptedException {
-        Deadlock deadlock = new Deadlock();
-
-        Thread threadA = new Thread(() -> {
-            deadlock.run();
-            System.out.println("Running...");
-        });
-        Thread threadB = new Thread(() -> {
-            deadlock.stopProcess();
-            System.out.println("Stopped...");
-        });
-        threadA.start();
-        threadB.start();
-    }
+    Thread threadA = new Thread(() -> {
+      deadlock.run();
+      System.out.println("Running...");
+    });
+    Thread threadB = new Thread(() -> {
+      deadlock.stopProcess();
+      System.out.println("Stopped...");
+    });
+    threadA.start();
+    threadB.start();
+  }
 }
 
