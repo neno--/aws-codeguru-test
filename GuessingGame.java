@@ -9,46 +9,20 @@ public class GuessingGame {
         int userAnswer = scanner.nextInt();
 
         // Guess 1
-        if (userAnswer <=0 || userAnswer >100) {
-            System.out.println("Invalid response");
-        }
-        else if (userAnswer == computerNumber ){
-            System.out.println("Correct! You win! See you next time!");
-            System.exit(0);
-        }
-        else if (userAnswer > computerNumber) {
-            System.out.println("Your guess is too high, guess again.");
-        }
-        else if (userAnswer < computerNumber) {
-            System.out.println("Your guess is too low, guess again.");
-        }
-        else {
-            System.out.println("Your guess is incorrect");
-        }
+        guess();
 
         // Guess 2
-        System.out.println("Enter a guess between 1 and 100");
-        userAnswer = scanner.nextInt();
-
-        if (userAnswer <=0 || userAnswer >100) {
-            System.out.println("Invalid response");
-        }
-        else if (userAnswer == computerNumber ){
-            System.out.println("Correct! You win! See you next time!");
-            System.exit(0);
-        }
-        else if (userAnswer > computerNumber) {
-            System.out.println("Your guess is too high, guess again.");
-        }
-        else if (userAnswer < computerNumber) {
-            System.out.println("Your guess is too low, guess again.");
-        }
-        else {
-            System.out.println("Your guess is incorrect");
-        }
+        guess();
 
         // Guess 3
-        System.out.println("Enter a guess between 1 and 100");
+        guess();
+        }
+
+        System.out.println("Sorry for your luck, restart the program to play again!");
+    }
+
+    private static void guess() {
+System.out.println("Enter a guess between 1 and 100");
         userAnswer = scanner.nextInt();
 
         if (userAnswer <=0 || userAnswer >100) {
@@ -66,8 +40,5 @@ public class GuessingGame {
         }
         else {
             System.out.println("Your guess is incorrect");
-        }
-
-        System.out.println("Sorry for your luck, restart the program to play again!");
     }
 }
